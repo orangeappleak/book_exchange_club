@@ -9,10 +9,19 @@
     padding: 0;
 }
 
+
 #login-page{
     display: flex;
     flex-direction: row;
     height: 100vh;
+    background-color: white;
+    color: black;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+#login-page.animate.loginSuccess{
+    color: white;
+    background-color: black;
 }
 
 #login-page #main-image{
@@ -47,4 +56,48 @@
 #login-section p #imp{
     font-weight: 800;
     color: purple;
+}
+
+#login-panel .firebaseui-container {
+    margin: 0;
+}
+
+#login-panel .firebaseui-card-content{
+    padding: 0;
+}
+
+#login-panel .firebaseui-idp-button{
+    max-width: none;
+    background-color: purple !important;
+    border-radius: 10px !important;
+    margin: 1em 0em;
+    color: white !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    transition: width 0.2s cubic-bezier(.75,0,.24,.99),border-radius 0.5s ease-in-out;
+}
+
+#login-panel .firebaseui-idp-button:hover{
+    border-radius: 40px;
+    width: 120%;
+}
+
+
+#login-panel > div > div.firebaseui-card-content > form > ul > li > button > span.firebaseui-idp-text.firebaseui-idp-text-long{
+    color: white;
+    font-size: 22px;
+    padding: 0.4em 1em;
+    text-align: center;
+    font-family: var(--font);
+}
+
+.firebaseui-idp-button, .firebaseui-tenant-button{
+    font-weight: 500;
+    height: auto;
+    line-height: normal;
+    padding: 10em;
+    text-align: left;
+    width: 100%;
 }
