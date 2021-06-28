@@ -1,0 +1,15 @@
+webpackHotUpdate("main",{
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./src/components/component_styles/UserAccount.css":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--5-oneOf-4-1!./node_modules/postcss-loader/src??postcss!./src/components/component_styles/UserAccount.css ***!
+  \************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/postcss-loader/src/index.js):\nSyntaxError\n\n(164:5) Unknown word\n\n \u001b[90m 162 | \u001b[39m    width\u001b[33m:\u001b[39m 50%\u001b[33m;\u001b[39m\n \u001b[90m 163 | \u001b[39m    height\u001b[33m:\u001b[39m 100vh\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 164 | \u001b[39m    fl\n \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 165 | \u001b[39m\u001b[33m}\u001b[39m\n \u001b[90m 166 | \u001b[39m\n");
+
+/***/ })
+
+})
+//# sourceMappingURL=main.f0792edd3dcc96f87ada.hot-update.js.map
