@@ -1,0 +1,65 @@
+#nav-bar-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+}
+
+#nav-bar{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    height: 7vh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    border: 2px solid orange;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 0.5em 4em 0.5em 4em;
+}
+
+#nav-bar #logo{
+    font-size: 25px;
+    font-family: 'Lato';
+    font-weight: 900;
+}
+
+#nav-bar h1{
+    color: white;
+    font-size: 20px;
+}
+
+#nav-links{
+    display: flex;
+    flex-direction: row;
+    color: red;
+}
+
+#nav-links h1{
+    margin-left: 2.5em;
+    font-family: 'Lato';
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#category-list{
+    border: 2px solid red;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 40em 40em 40em;
+    align-items: center;
+    justify-self: stretch;
+}
+
+#category{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#category-list #category #category-image{
+    width: 40%;
+    height: 100%;
+}
