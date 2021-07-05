@@ -4,31 +4,49 @@ import {
   BrowserRouter as Router,
   Switch,
   Link,
-  Route
+  Route,
+  useParams,
+  useRouteMatch
 } from 'react-router-dom';
 
 import MainPage from './Components/MainPage';
-import TopBooks from './Components/TopBooks';
+import TopCategories from './Components/TopBooks';
 import Profile from './Components/Profile';
 import NavBar from './Components/NavBar';
 
 function App() {
+
+
   return (
     <div className="App">
       <Router>
+          <LoaderPage />
           <NavBar />
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route exact path="/topBooks">
-            <TopBooks />
-          </Route>
-          <Route exact path="/profile">
-            <Profile />
-          </Route>
+          <Switch>
+
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+            <Route path="/topCategories">
+              <TopCategories />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          </Switch>
       </Router>
     </div>
   );
+}
+
+export function LoaderPage(){
+  return(
+    <div id="loading-page">
+      <div id="gif-wrapper">
+        <img src="https://media4.giphy.com/media/PZVbGp9cCbDJS/giphy.gif" />
+      </div>
+    </div>
+  )
 }
 
 export default App;

@@ -1,20 +1,24 @@
 #nav-bar-wrapper{
+    position: sticky;
+    top: 0px;
     display: flex;
     justify-content: center;
+    z-index: 5;
     align-items: center;
-    border: 2px solid red;
 }
 
 #nav-bar{
+    position: absolute;
+    top: 1px;
     width: 60%;
     display: flex;
     flex-direction: row;
     height: 7vh;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
-    border: 2px solid orange;
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
+    backdrop-filter: blur(10px);
     margin: 20px;
     padding: 0.5em 4em 0.5em 4em;
 }
@@ -33,33 +37,88 @@
 #nav-links{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
     color: red;
 }
 
 #nav-links h1{
-    margin-left: 2.5em;
+    margin:0 2em;
     font-family: 'Lato';
     font-weight: 400;
     cursor: pointer;
 }
 
-#category-list{
-    border: 2px solid red;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 40em 40em 40em;
-    align-items: center;
-    justify-self: stretch;
-}
-
-#category{
+#firebase-login > div > div.firebaseui-card-content > form > ul > li > button{
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    padding: 10px 40px;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    max-width: none;
+    transform: translate(0%,0%);
+    transition: transform 0.1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
-#category-list #category #category-image{
-    width: 40%;
-    height: 100%;
+#firebase-login:hover div > div.firebaseui-card-content > form > ul > li > button{
+    transform: translate(0%,-10%);
+}
+
+#firebase-login > div > div.firebaseui-card-content > form > ul > li > button > span.firebaseui-idp-text.firebaseui-idp-text-long{
+    display: none;
+    font-size: 15px;
+    font-family: 'Lato';
+    font-weight: 400;
+    margin-right: 20px;
+}
+
+#profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#profile h1{
+    margin: 10px;
+}
+
+#profile img{
+    width: 60%;
+    cursor: pointer;
+    border-radius: 100px;
+}
+
+#profile-dropdown{
+    padding: 50px;
+    position: absolute;
+    color: white;
+    padding: 10px;
+    background-color: black;
+    border-radius: 20px;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0%,70%);
+    opacity: 0;
+    font-family: 'Lato';
+    transition:opacity 0.2s ease-in-out;
+}
+
+#profile-dropdown.show{
+    display: inline;
+    opacity: 1;
+    transform: translate(0%,70%);
+}
+
+#profile-dropdown #profile-name{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+#profile-dropdown h1{
+    font-size: 18px;
+    font-weight: 300;
 }
