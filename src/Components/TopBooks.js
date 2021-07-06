@@ -7,10 +7,8 @@ import {
     Switch,
     useParams,
     useRouteMatch,
-    Redirect,
     Link
 } from 'react-router-dom';
-import { JSDOM } from 'jsdom';
 
 export default function TopCategories(){
 

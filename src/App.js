@@ -1,18 +1,16 @@
 import './App.css';
+import React,{ Suspense, lazy} from 'react';
 
 import {
   BrowserRouter as Router,
   Switch,
-  Link,
-  Route,
-  useParams,
-  useRouteMatch
+  Route
 } from 'react-router-dom';
 
-import MainPage from './Components/MainPage';
-import TopCategories from './Components/TopBooks';
-import Profile from './Components/Profile';
-import NavBar from './Components/NavBar';
+const MainPage = lazy(() => import('./Components/MainPage'));
+const TopCategories = lazy(() => import('./Components/TopBooks'));
+const Profile = lazy(() => import('./Components/Profile'));
+const NavBar = lazy(() => import('./Components/NavBar'));
 
 function App() {
 
@@ -20,6 +18,8 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Suspense fallback={<LoaderPage />}>
+
           <LoaderPage />
           <NavBar />
           <Switch>
@@ -34,6 +34,7 @@ function App() {
               <Profile />
             </Route>
           </Switch>
+        </Suspense>
       </Router>
     </div>
   );

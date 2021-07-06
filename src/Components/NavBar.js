@@ -1,16 +1,12 @@
 import React,{useEffect,useState} from 'react';
 import firebase from 'firebase';
 import {
-    Link,
-    BrowserRouter as Router,
-    Redirect,
     useHistory
 } from 'react-router-dom';
 
 import { ui } from '../firebase';
 
 import './stylesheets/NavBar.css';
-import { auth } from 'firebaseui';
 
 export default function NavBar(){
 
