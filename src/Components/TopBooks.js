@@ -25,7 +25,8 @@ export default function TopCategories(){
         console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
-            fetch('/api/http://bec-goodreads-api.herokuapp.com/popularCategories')
+            console.log(/api/popularBooks);
+            fetch('/api/popularBooks')
             .then(data => {
                 console.log("data",data.json());
 
@@ -114,7 +115,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/api/http://bec-goodreads-api.herokuapp.com/popularCategories/${pageRoute}`)
+            fetch(`/api/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);
