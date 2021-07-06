@@ -2,3 +2,8 @@
     from = "/*"
     to = "/index.html"
     status = 200
+
+[[redirect]]
+    from = "/api/*"
+    to = "http://bec-goodreads-api.herokuapp.com"
+    status = 200
