@@ -1,9 +1,9 @@
 [[redirects]]
-    from = "/*"
-    to = "/index.html"
+    from = "/api/:route"
+    to = "http://bec-goodreads-api.herokuapp.com/:route"
     status = 200
 
 [[redirects]]
-    from = "/api/:route"
-    to = "http://bec-goodreads-api.herokuapp.com/:route"
+    from = "/*"
+    to = "/index.html"
     status = 200
