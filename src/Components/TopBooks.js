@@ -20,33 +20,31 @@ export default function TopCategories(){
 
     useEffect(() => {
 
-        // document.getElementById('loading-page').style.transform = "translate(0%,0%)";
-        // var local_books_data = sessionStorage.getItem('books-categories');
-        // console.log(JSON.parse(local_books_data));
+        document.getElementById('loading-page').style.transform = "translate(0%,0%)";
+        var local_books_data = sessionStorage.getItem('books-categories');
+        console.log(JSON.parse(local_books_data));
 
-        // if(local_books_data === null){
-        //     fetch('/popularCategories')
-        //     .then(data => {
-        //         // console.log("data",data.json());
+        if(local_books_data === null){
+            fetch('/api/popularCategories')
+            .then(data => {
+                // console.log("data",data.json());
 
-        //         return data.json();
-        //     })
-        //     .then(response => {
-        //         updateCategories(response);
-        //         sessionStorage.setItem('books-categories',JSON.stringify(response));
-        //     })
-        //     .then(() => {
-        //         updatePageLoadStatus(true);
-        //         document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
-        //     })
-        // }
-        // else{
-        //     updatePageLoadStatus(true);
-        //     document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
-        //     updateCategories(JSON.parse(local_books_data));
-        // }
-
-        updatePageLoadStatus(true);
+                return data.json();
+            })
+            .then(response => {
+                updateCategories(response);
+                sessionStorage.setItem('books-categories',JSON.stringify(response));
+            })
+            .then(() => {
+                updatePageLoadStatus(true);
+                document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
+            })
+        }
+        else{
+            updatePageLoadStatus(true);
+            document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
+            updateCategories(JSON.parse(local_books_data));
+        }
     }, [pageLoaded])
 
     return(
@@ -71,7 +69,7 @@ function TopBooksWrapper({path,categories}){
             </div>
             
 
-            {/* <Switch>
+            <Switch>
                 <Route exact path={`${path}`}>
                     <h1 id='category-heading'>Categories</h1>
                     <CategoriesList path={path} categories = {categories}/>
@@ -79,7 +77,7 @@ function TopBooksWrapper({path,categories}){
                 <Route exact path={`${path}/:pageRoute`}>
                     <TopBooksPage />
                 </Route>
-            </Switch> */}
+            </Switch>
         </div>
     )
 }
@@ -116,7 +114,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/popularCategories/${pageRoute}`)
+            fetch(`/api/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);
