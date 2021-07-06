@@ -5,5 +5,5 @@
 
 [[redirect]]
     from = "/api/*"
-    to = "http://bec-goodreads-api.herokuapp.com/:splat"
+    to = ":splat"
     status = 200
