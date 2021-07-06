@@ -14,6 +14,8 @@ export default function TopCategories(){
 
     let {path, url} = useRouteMatch()
 
+    console.log("path = ",path,"url =",url)
+
     let [categories, updateCategories] = useState({})
     let [pageLoaded, updatePageLoadStatus] = useState(false);
 
@@ -25,9 +27,8 @@ export default function TopCategories(){
         console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
-            fetch("/api/popularBooks")
+            fetch("/api/popularCategories")
             .then(data => {
-                console.log("data",data.json());
 
                 return data.json();
             })

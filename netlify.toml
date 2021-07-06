@@ -1,6 +1,6 @@
 [[redirects]]
-    from = "/api/:route"
-    to = "http://bec-goodreads-api.herokuapp.com/:route"
+    from = "/api/*"
+    to = "https://bec-goodreads-api.herokuapp.com/:splat"
     status = 200
 
 [[redirects]]

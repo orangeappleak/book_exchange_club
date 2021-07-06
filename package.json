@@ -1,7 +1,6 @@
 {
   "name": "bec_remake",
   "version": "0.1.0",
-  "proxy": "http://bec-goodreads-api.herokuapp.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
