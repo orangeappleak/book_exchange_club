@@ -25,7 +25,7 @@ export default function TopCategories(){
         console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
-            fetch('/api/popularBooks')
+            fetch("/api/popularBooks")
             .then(data => {
                 console.log("data",data.json());
 
