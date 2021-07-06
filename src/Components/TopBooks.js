@@ -10,6 +10,7 @@ import {
     Redirect,
     Link
 } from 'react-router-dom';
+import { JSDOM } from 'jsdom';
 
 export default function TopCategories(){
 
@@ -23,10 +24,13 @@ export default function TopCategories(){
 
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var local_books_data = sessionStorage.getItem('books-categories');
+        console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
-            fetch('https://bec-goodreads-api.herokuapp.com/popularCategories')
+            fetch('/popularCategories')
             .then(data => {
+                // console.log("data",data.json());
+
                 return data.json();
             })
             .then(response => {
@@ -80,7 +84,8 @@ function TopBooksWrapper({path,categories}){
 }
 
 function CategoriesList({path,categories}){
-    let categories_list = categories.popular_book_categories;
+    let categories_list = categories['popular_book_categories'];
+    console.log("categories_list",categories_list);
     return(
         <div id="category-list">
             {categories_list.map((el) => {
@@ -110,7 +115,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`https://bec-goodreads-api.herokuapp.com/popularCategories/${pageRoute}`)
+            fetch(`/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);
