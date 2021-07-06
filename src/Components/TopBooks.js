@@ -54,6 +54,7 @@ export default function TopCategories(){
 }
 
 function TopBooksWrapper({path,categories}){
+    console.log("path = ",path);
     return(
         <div id="top-books-wrapper">
             <div id="top-books-main">

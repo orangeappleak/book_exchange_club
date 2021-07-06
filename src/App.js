@@ -4,7 +4,8 @@ import React,{ Suspense, lazy} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  useRouteMatch
 } from 'react-router-dom';
 
 const MainPage = lazy(() => import('./Components/MainPage'));
@@ -14,6 +15,7 @@ const NavBar = lazy(() => import('./Components/NavBar'));
 
 function App() {
 
+  
 
   return (
     <div className="App">
@@ -41,6 +43,7 @@ function App() {
 }
 
 export function LoaderPage(){
+
   return(
     <div id="loading-page">
       <div id="gif-wrapper">
