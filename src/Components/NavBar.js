@@ -62,7 +62,7 @@ export default function NavBar(){
                 <div id="nav-links">
                     <h1 onClick = {() => moveTo('/')}>Home</h1>
                     <h1 onClick ={() => moveTo('/topCategories')}>Top Books</h1>
-
+                    <h1>Explore</h1>
                     {loggedIn ? <ProfileData updateLogOutStatus = {updateLogInStatus} userDetails = {userDetails}/> : <div id="sign-in">
                         {/* <h1 onClick={() => moveTo('/profile')}>Sign In</h1> */}
                         <div id="firebase-login"></div>
@@ -78,7 +78,7 @@ function ProfileData({userDetails,updateLogOutStatus}){
     console.log("user",userDetails);
     return(
         <div onMouseEnter = {profileDropDown} onMouseLeave = {profileDropDownExit} id="profile">
-            <img src={userDetails.picture} />
+            <img src={userDetails.picture} alt="cant show"/>
             <div id="profile-dropdown">
                 <h1 id="profile-name">{userDetails.name}</h1>
                 <h1>Profile</h1>

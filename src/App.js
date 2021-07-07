@@ -1,11 +1,11 @@
 import './App.css';
+import './Components/stylesheets/mobile.css';
 import React,{ Suspense, lazy} from 'react';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useRouteMatch
 } from 'react-router-dom';
 
 const MainPage = lazy(() => import('./Components/MainPage'));
@@ -47,7 +47,7 @@ export function LoaderPage(){
   return(
     <div id="loading-page">
       <div id="gif-wrapper">
-        <img src="https://media4.giphy.com/media/PZVbGp9cCbDJS/giphy.gif" />
+        <img alt="cant load data" src="https://i.pinimg.com/originals/ce/0c/4d/ce0c4db42ba14cb241f60862fcb2d773.gif" />
       </div>
     </div>
   )

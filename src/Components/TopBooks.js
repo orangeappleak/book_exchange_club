@@ -27,7 +27,7 @@ export default function TopCategories(){
         console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
-            fetch("/api/popularCategories")
+            fetch("/popularCategories")
             .then(data => {
 
                 return data.json();
@@ -60,7 +60,7 @@ function TopBooksWrapper({path,categories}){
         <div id="top-books-wrapper">
             <div id="top-books-main">
                 <div id="top-books-img">
-                    <img src="https://images.unsplash.com/photo-1625198474162-a9e240505312?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" />
+                    <img src="https://images.unsplash.com/photo-1625198474162-a9e240505312?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="cant load"/>
                 </div>
                 <div id="top-books-headings">
                     <h1>These are the top Book Categories. </h1>
@@ -93,7 +93,7 @@ function CategoriesList({path,categories}){
                     <Link to ={`${path}/${el.category_route}`}>
                         <div className = {el.category_route} id="category">
                             <div id="category-image">
-                                <img src={el.category_image} />
+                                <img src={el.category_image} alt="cant load"/>
                             </div>
                             <div id="category-name-wrapper">
                                 <h1 id="category-name">{el.category_name}</h1>
@@ -110,12 +110,12 @@ function TopBooksPage(){
     let {pageRoute} = useParams();
     let [booksData,updateBooksData] = useState({});
     let [subPageLoaded,updateSubPageLoad] = useState(false);
-
+    
     useEffect(() => {
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/api/popularCategories/${pageRoute}`)
+            fetch(`/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);
@@ -143,7 +143,7 @@ function TopBooksPage(){
             <div id="best-voted-book">
                 <div id="best-voted-book-image">
                     <div id="book-image-wrapper">
-                        <img src={booksData[pageRoute][0].book_image} />
+                        <img alt='cant show' src={booksData[pageRoute][0].book_image} />
                     </div>
                 </div>
                 <div id="best-voted-book-data">
@@ -183,7 +183,7 @@ function BooksList({booksData,pageRoute}){
                         el.target.classList.remove('show')
                     }} id="book-data">
                         <div id="book-image-wrapper">
-                            <img src={book.book_image} />
+                            <img alt="cant show" src={book.book_image} />
                         </div>
                         <div id="book-name-wrapper">
                             <h1>{book.book_name}</h1>
