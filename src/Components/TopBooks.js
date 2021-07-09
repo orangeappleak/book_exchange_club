@@ -10,11 +10,11 @@ import {
     Link
 } from 'react-router-dom';
 
+import SelectedBookPage from './SelectedBook';
+
 export default function TopCategories(){
 
     let {path, url} = useRouteMatch()
-
-    console.log("path = ",path,"url =",url)
 
     let [categories, updateCategories] = useState({})
     let [pageLoaded, updatePageLoadStatus] = useState(false);
@@ -24,12 +24,10 @@ export default function TopCategories(){
 
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var local_books_data = sessionStorage.getItem('books-categories');
-        console.log(JSON.parse(local_books_data));
 
         if(local_books_data === null){
             fetch("/api/popularCategories")
             .then(data => {
-
                 return data.json();
             })
             .then(response => {
@@ -78,6 +76,13 @@ function TopBooksWrapper({path,categories}){
                 <Route exact path={`${path}/:pageRoute`}>
                     <TopBooksPage />
                 </Route>
+
+                <Route exact path="/topCategories/:pageRoute/:book_url">
+                    <SelectedBookPage />
+                </Route>
+
+                
+
             </Switch>
         </div>
     )
@@ -85,7 +90,6 @@ function TopBooksWrapper({path,categories}){
 
 function CategoriesList({path,categories}){
     let categories_list = categories['popular_book_categories'];
-    console.log("categories_list",categories_list);
     return(
         <div id="category-list">
             {categories_list.map((el) => {
@@ -108,6 +112,7 @@ function CategoriesList({path,categories}){
 
 function TopBooksPage(){
     let {pageRoute} = useParams();
+    let pagePath = useRouteMatch();
     let [booksData,updateBooksData] = useState({});
     let [subPageLoaded,updateSubPageLoad] = useState(false);
     
@@ -165,18 +170,28 @@ function TopBooksPage(){
             </div>
             <h1 id="page-heading">{pageRoute.replaceAll("-"," ")}</h1>
             
-            <BooksList booksData = {booksData} pageRoute = {pageRoute}/> 
+            <BooksList booksData = {booksData} pageRoute = {pageRoute}/>
+
+            
         </div>
     )
 : <span></span>)
 }
 
 function BooksList({booksData,pageRoute}){
+
+
     return(
         <div id="books-page">
             
             {booksData[pageRoute].slice(1).map((book) => {
+
+
+                let book_url = book.book_url.split("/");
+
                 return (
+                    <Link to={`${pageRoute}/${book_url[3]}`}>
+                        
                     <div onMouseEnter= {(el) => {
                         el.target.classList.add('show')
                     }} onMouseLeave={(el) => {
@@ -191,8 +206,12 @@ function BooksList({booksData,pageRoute}){
                         <div id="ratings-wrapper">
                             <h1 id="ratings">{book.book_ratings}</h1>
                         </div>
+
+            
+
                         
                     </div>
+                    </Link>
                 )
             })}
         </div>
