@@ -37,18 +37,23 @@ export default function SelectedBookPage(){
 
     function BookInfo(){
 
-        let bookInfo = bookData.bookData[0];
+        let bookInfo = bookData.book_data[0];
         let authorInfo = bookInfo.about_author;
-        let author_profile_image = authorInfo.author_profile_image.replace("background-image:","");
-        let genres = bookData.bookData[0].book_genres;
-        console.log(author_profile_image);
+        let genres = bookData.book_data[0].book_genres;
+        let reviews = bookData.book_data[0].community_reviews;
 
-        return (<div className="book-info" id={book_url}>
+
+        return (
+            <div id="book-info-wrapper">
+
+
+          
+        <div className="book-info" id={book_url}>
             <div id="image-wrapper">
                 <img src={bookInfo.book_image} />
                
             </div>
-            <div id="book-info">
+            <div id="seperated-book-info">
                 <h1>{bookInfo.book_name}</h1>
                 <div id="book-info-and-genres">
                     <h2>{bookInfo.books_desc}</h2>
@@ -68,12 +73,21 @@ export default function SelectedBookPage(){
                             <h2 id="author-name">Name : {authorInfo.author_name}</h2>
                             <h2 id="author-followers">Follower Count : {authorInfo.author_follower_count}</h2>
                         </div>
-                        {/* <img style={{
-                            backgroundImage: author_profile_image,
-                        }} /> */}
                     </div>
                     <h2 id="author-desc">{authorInfo.author_profile_desc}</h2>
                 </div>
+            </div>
+        </div>
+            <div id="book-reviews">
+                {reviews.map((review) => {
+                    console.log(review)
+                    return <div id="review-content">
+                            <div id="reviewer-info">
+                                <img src={review.book_review.book_reviewer_image} />
+                                <h1>{review.book_review.book_reviewer_name}</h1>
+                            </div>
+                        </div>
+                })}
             </div>
         </div>)
     }
