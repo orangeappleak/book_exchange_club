@@ -84,18 +84,68 @@
 
 #book-reviews{
     margin: 10px 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#book-reviews-heading{
+    font-size: 30px;
+    font-family: 'Lato';
+    text-align: center;
+    margin: 40px 50px;
 }
 
 #book-reviews #review-content{
     border: 2px solid black;
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 50%;
+    padding: 20px;
     margin: 40px 0;
+    transition: height 2s ease-in-out;
+    box-shadow: 0 40px 55px -40px rgb(0, 0, 1);
 }
 
 #book-reviews #reviewer-info{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#reviewer-info h1{
+    color: white;
+    font-weight: 300;
+    font-family: 'Lato';
+    font-size: 22px;
+}
+
+#reviewer-image-wrapper{
+    border: 2px solid orange;
+    height: 50px;
+    border-radius: 100px;
+    margin-right: 20px;
+    overflow: hidden;
 }
 
 #reviewer-info img{
     border-radius: 200px;
+}
+
+#reviewer-review{
+    color: white;
+    font-size: 18px;
+    font-family: 'Lato';
+    line-height: 30px;
+    font-weight: 200;
+    text-align: justify;
+}
+
+#read-more{
+    color: orange;
+    margin:0 20px;
+    font-weight: 900;
+    font-family: 'Lato';
 }

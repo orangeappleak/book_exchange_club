@@ -186,7 +186,63 @@
     #top-books-wrapper #book-info-wrapper .book-info{
         display: flex;
         flex-direction: column;
+        align-items: center;
+        padding: 0
     }
+
+    #book-info-wrapper .book-info #seperated-book-info{
+        margin: 0;
+        padding: 30px;
+    }
+
+    #book-info-wrapper #book-info-and-genres{
+        flex-direction: column;
+    }
+
+    #book-info-wrapper #book-info-and-genres h2{
+        margin: 0;
+    }
+
+    #seperated-book-info #genres{
+        margin: 40px 0;
+    }
+
+    #seperated-book-info #genres > h1{
+        text-align: center;
+    }
+
+    #seperated-book-info #genres #genre-list #genre-name{
+        text-align: center !important;
+    }
+
+    #seperated-book-info #about-author{
+        margin :0;
+    }
+
+    #book-info-wrapper #book-reviews-heading{
+        width: 70%;
+        text-align: left;
+        margin: 30px 40px;
+    }
+
+    #seperated-book-info #about-author #author-desc{
+        margin: 0;
+    }
+
+
+    #book-info-wrapper #book-reviews #review-content{
+        width: 100%;
+    }
+
+    #book-info-wrapper #book-reviews #review-content #reviewer-review{
+        width: 100%;
+    }
+
+    #book-info-wrapper #book-reviews #review-content #reviewer-review #read-more{
+        margin: 0 20px 0 0;
+    }
+
+    
 
 
 }

@@ -41,6 +41,7 @@ export default function SelectedBookPage(){
         let authorInfo = bookInfo.about_author;
         let genres = bookData.book_data[0].book_genres;
         let reviews = bookData.book_data[0].community_reviews;
+        let count = 0;
 
 
         return (
@@ -78,17 +79,47 @@ export default function SelectedBookPage(){
                 </div>
             </div>
         </div>
+                <h1 id="book-reviews-heading">See What other people have to say about this book.</h1>
             <div id="book-reviews">
                 {reviews.map((review) => {
                     console.log(review)
                     return <div id="review-content">
                             <div id="reviewer-info">
-                                <img src={review.book_review.book_reviewer_image} />
+                                <div id="reviewer-image-wrapper">
+                                    <img src={review.book_review.book_reviewer_image} />
+                                </div>
                                 <h1>{review.book_review.book_reviewer_name}</h1>
+                            </div>
+                            <div id="reviewer-review">
+                                <span id="book_review_stacked" style={{
+                                    display: 'inline',
+                                }}>{review.book_review.book_review_content_stacked}<br/></span>
+                                <span onClick={openReadMore} id="read-more">Read More</span>
+                                <span id="book_review_full" style={{
+                                    display: 'none'
+                                }}>{review.book_review.book_review_content_full}</span>
                             </div>
                         </div>
                 })}
             </div>
         </div>)
+    }
+    
+
+
+    function openReadMore(el){
+        console.log(el);
+        if(el.target.innerHTML === "Less"){
+            el.target.innerHTML = "Read More";
+            el.target.nextSibling.style.display = "none";
+            el.target.previousSibling.style.display = "inline";
+
+        }
+        else{
+            el.target.innerHTML = "Less";
+            el.target.nextSibling.style.display = "inline";
+            el.target.previousSibling.style.display = "none";
+        }
+
     }
 }
