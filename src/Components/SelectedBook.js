@@ -11,13 +11,13 @@ export default function SelectedBookPage(){
 
 
     useEffect(() => {
-        console.log(bookData.bookData);
-        fetch("/api/" + book_url)
-        .then(data => data.json())
-        .then(response => {
-            updateBooksData(response);
-            updatePageLoadStatus(true);
-        })
+        console.log(bookData);
+        if(!pageLoaded)
+            fetch("/api/" + book_url)
+            .then(data => data.json())
+            .then(response => {
+                    updateBooksData(response);
+            }).then(() => updatePageLoadStatus(true))
     },[pageLoaded])
 
     return (
@@ -56,6 +56,11 @@ export default function SelectedBookPage(){
             </div>
             <div id="seperated-book-info">
                 <h1>{bookInfo.book_name}</h1>
+                <span id="rating-data">
+                    <h2>Book Rating: {bookInfo.book_rating_value}</h2>
+                    <h2>No of Ratings: {bookInfo.book_ratings}</h2>
+
+                </span>
                 <div id="book-info-and-genres">
                     <h2>{bookInfo.books_desc}</h2>
                     <div id="genres">
@@ -88,7 +93,12 @@ export default function SelectedBookPage(){
                                 <div id="reviewer-image-wrapper">
                                     <img src={review.book_review.book_reviewer_image} />
                                 </div>
+                                <span style={{display: 'flex',flexDirection: 'column'}}>
+
                                 <h1>{review.book_review.book_reviewer_name}</h1>
+                                <h2>{review.book_review.review_likes}</h2>
+
+                                </span>
                             </div>
                             <div id="reviewer-review">
                                 <span id="book_review_stacked" style={{

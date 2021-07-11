@@ -48,6 +48,10 @@
     margin-left: 80px;
 }
 
+#seperated-book-info > span{
+    margin: 50px;
+}
+
 #genres{
     flex: 1;
 }
@@ -117,9 +121,16 @@
 
 #reviewer-info h1{
     color: white;
-    font-weight: 300;
+    font-weight: 400;
     font-family: 'Lato';
     font-size: 22px;
+}
+
+#reviewer-info h2{
+    color: white;
+    font-size: 18px;
+    font-family: 'Lato';
+    font-weight: 100;
 }
 
 #reviewer-image-wrapper{
