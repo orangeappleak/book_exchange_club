@@ -14,7 +14,7 @@ import SelectedBookPage from './SelectedBook';
 
 export default function TopCategories(){
 
-    let {path, url} = useRouteMatch()
+    let {path} = useRouteMatch()
 
     let [categories, updateCategories] = useState({})
     let [pageLoaded, updatePageLoadStatus] = useState(false);
@@ -112,7 +112,6 @@ function CategoriesList({path,categories}){
 
 function TopBooksPage(){
     let {pageRoute} = useParams();
-    let pagePath = useRouteMatch();
     let [booksData,updateBooksData] = useState({});
     let [subPageLoaded,updateSubPageLoad] = useState(false);
     

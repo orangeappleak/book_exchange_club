@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { LoaderPage } from '../App';
 
 import './stylesheets/SelectedBook.css';
 
@@ -11,7 +10,6 @@ export default function SelectedBookPage(){
 
 
     useEffect(() => {
-        console.log(bookData);
         if(!pageLoaded)
             fetch("/api/" + book_url)
             .then(data => data.json())
@@ -28,7 +26,7 @@ export default function SelectedBookPage(){
                 display: "flex",
                 justifyContent: "center"
             }}>
-                <img style={{
+                <img alt="cant show" style={{
                     borderRadius: '20px',
                 }} src="https://www.keyboor.com/images/loading1.gif" />
             </span>
@@ -41,7 +39,6 @@ export default function SelectedBookPage(){
         let authorInfo = bookInfo.about_author;
         let genres = bookData.book_data[0].book_genres;
         let reviews = bookData.book_data[0].community_reviews;
-        let count = 0;
 
 
         return (
@@ -51,7 +48,7 @@ export default function SelectedBookPage(){
           
         <div className="book-info" id={book_url}>
             <div id="image-wrapper">
-                <img src={bookInfo.book_image} />
+                <img alt="cant show" src={bookInfo.book_image} />
                
             </div>
             <div id="seperated-book-info">
@@ -91,7 +88,7 @@ export default function SelectedBookPage(){
                     return <div id="review-content">
                             <div id="reviewer-info">
                                 <div id="reviewer-image-wrapper">
-                                    <img src={review.book_review.book_reviewer_image} />
+                                    <img alt="cant show" src={review.book_review.book_reviewer_image} />
                                 </div>
                                 <span style={{display: 'flex',flexDirection: 'column'}}>
 
