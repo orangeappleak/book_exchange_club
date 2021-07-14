@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 
 import './stylesheets/SelectedBook.css';
 
+import {customAlert} from '../App';
+
+import {db} from '../firebase';
+import firebase from 'firebase';
+
 export default function SelectedBookPage(){
     let {book_url} = useParams();
     let [bookData,updateBooksData] = useState({});
@@ -11,7 +16,7 @@ export default function SelectedBookPage(){
 
     useEffect(() => {
         if(!pageLoaded)
-            fetch("/api/" + book_url)
+            fetch("/" + book_url)
             .then(data => data.json())
             .then(response => {
                     updateBooksData(response);
@@ -49,7 +54,15 @@ export default function SelectedBookPage(){
         <div className="book-info" id={book_url}>
             <div id="image-wrapper">
                 <img alt="cant show" src={bookInfo.book_image} />
-               
+               <div onClick={(el) => updateBookLists(el,bookInfo)} className="wantToRead" id="want-to-read">
+                   <h1>Want to Read</h1>
+               </div>
+               <div className="ownedBook" id="own-this-book">
+                   <h1>Own This Book</h1>
+               </div>
+               <div className="readBook" id="read">
+                   <h1>Read this Book</h1>
+               </div>
             </div>
             <div id="seperated-book-info">
                 <h1>{bookInfo.book_name}</h1>
@@ -84,7 +97,6 @@ export default function SelectedBookPage(){
                 <h1 id="book-reviews-heading">See What other people have to say about this book.</h1>
             <div id="book-reviews">
                 {reviews.map((review) => {
-                    console.log(review)
                     return <div id="review-content">
                             <div id="reviewer-info">
                                 <div id="reviewer-image-wrapper">
@@ -112,6 +124,31 @@ export default function SelectedBookPage(){
         </div>)
     }
     
+
+    function updateBookLists(el,bookInfo){
+        let userData = JSON.parse(localStorage.getItem('profile-data'));
+        if(userData!=null){
+            let userName = userData.name;
+            let addTo = el.target.parentElement.classList[0];
+            if(addTo === 'wantToRead'){
+                console.log('adding');
+                customAlert("adding the book");
+                db.collection('users').doc(userName).collection('booksList').doc('wantToRead').get().then((data) =>{
+                
+                    db.collection('users').doc(userName).collection('booksList').doc('wantToRead')
+                    .update({
+                       booksData: firebase.firestore.FieldValue.arrayUnion(bookInfo),
+                    }).then(() => {
+                        customAlert( bookInfo.book_name +" was added to want to read list");
+                    });
+                });
+                }
+
+        }
+        else{
+            alert('log in first idiot');
+        }
+    }
 
 
     function openReadMore(el){

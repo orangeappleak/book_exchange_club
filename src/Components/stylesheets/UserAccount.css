@@ -2,14 +2,15 @@
 
 #profile-page{
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-direction: column;
 }
 
-#profile-page > h1{
-    width: 40%;
+#profile-page-heading-wrapper > h1{
+    text-align: left;
     margin: 50px;
-    position: absolute;
+    width: 60%;
+    height: 100%;
+    position: relative;
     color: white;
     font-size: 60px;
     font-family: 'Lato';
@@ -106,8 +107,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 100%;
-    width: 100vw;
+    width: 100%;
+    height: 60vh;
+    pointer-events: none;
 }
 
 #profile-data{
@@ -118,11 +120,12 @@
     flex-direction: column;
     color: black;
     justify-content: center;
-    align-items: flex-end;
+    align-items: left;
     width: auto;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.534);
     backdrop-filter: blur(5px);
+    pointer-events: all;
 }
 
 #profile-image{
@@ -130,13 +133,70 @@
     overflow: hidden;
     position: relative;
     height: 10em;
-    width: 10em;
+    width: 20em;
     border-radius: 10px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
+
+
 #profile-image img{
+    width: 100%;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.5s ease-in-out,opacity 0.3s ease-in-out;
+}
+
+#profile-image:hover img{
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+#edit-profile-image{
     height: 100%;
+    width: 100%;
+    padding: 0 20px;
+    position: absolute;
+    top:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0%,100%);
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#profile-image:hover #edit-profile-image{
+    transform: translate(0%,0%);
+}
+
+#edit-profile-image input{
+    position: relative;
+    padding: 5px 10px;
+    font-size: 15px;
+    text-align: center;
+    font-family: 'Lato';
+}
+
+#edit-profile-image input:focus{
+    outline: none;
+}
+
+#save-profile-image{
+    background-color: black;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+#save-profile-image h1{
+    color: white;
+    font-size: 12px;
+    padding: 5px 20px;
+    pointer-events: none;
 }
 
 #userName{
@@ -150,4 +210,16 @@
     font-size: 20px;
     font-weight: 100;
     font-family: 'Lato';
+}
+
+#book-lists{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+}
+
+.bookslist{
+    margin: 20px;
+    color: white;
+    background-color: black;
 }

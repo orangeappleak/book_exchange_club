@@ -18,6 +18,23 @@
     border-radius: 20px;
 }
 
+#want-to-read,#own-this-book,#read{
+    margin: 20px 100px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Lato';
+    font-weight: 900;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out,color 0.4s ease-in-out;
+}
+
+#want-to-read:hover,#own-this-book:hover,#read:hover{
+    color: black;
+    background-color: orange;
+}
+
 #seperated-book-info{
     flex: 1;
     color: white;

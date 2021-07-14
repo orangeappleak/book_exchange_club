@@ -10,6 +10,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import './firebase';
 
 
 import UserAccount from  './Components/UserAccount';
@@ -44,6 +45,7 @@ function App() {
       </Router>
 
 
+      <CustomAlert alert_data = "heelor world"/>
       </Provider>
 
     </div>
@@ -59,6 +61,25 @@ export function LoaderPage(){
       </div>
     </div>
   )
+}
+
+function CustomAlert({alert_data}){
+
+  return <div id="custom-alert-wrapper">
+    <div id="custom-alert">
+      <h1></h1>
+    </div>
+  </div>
+}
+
+export function customAlert(alert_data){
+  let alert_ = document.querySelector('#custom-alert');
+  alert_.classList.add('alert');
+  alert_.innerHTML = alert_data;
+  setTimeout(() => {
+   alert_.classList.remove('alert')
+   alert_.innerHTML = "";
+  }, 5000);
 }
 
 export default App;

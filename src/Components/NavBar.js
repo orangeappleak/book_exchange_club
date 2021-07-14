@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from 'react';
-import firebase from 'firebase';
 import {
     useHistory,
 } from 'react-router-dom';
@@ -9,6 +8,7 @@ import { ui } from '../firebase';
 import './stylesheets/NavBar.css';
 
 import {db} from '../firebase';
+import firebase from 'firebase';
 
 import store from '../store';
 
@@ -19,6 +19,7 @@ export default function NavBar(){
     
     var [userDetails, updateUserDetails] = useState({});
     var [loggedIn, updateLogInStatus] = useState(false);
+    var [bookData,updateBooksData] = useState({})
     
     useEffect(() => {
         try{
@@ -30,7 +31,22 @@ export default function NavBar(){
                 updateUserDetails(JSON.parse(profile_data));
                 addUserFirestore(JSON.parse(profile_data));
                 updateLogInStatus(true);
+
+                getBooksFromFirebase(JSON.parse(profile_data).name);
+
+                db.collection('users').doc(JSON.parse(profile_data).name).collection('booksList').onSnapshot(function(snapshot){
+                    let changes = snapshot.docChanges();
+                    changes.forEach((change)=>{
+                        if(change.type === 'modified'){
+                            console.log("change-type",change.type);
+                            getBooksFromFirebase(JSON.parse(profile_data).name);
+                        }
+                    })
+                    
+                });
             }
+
+           
 
             ui.start('#firebase-login', {
                 callbacks: {
@@ -57,6 +73,22 @@ export default function NavBar(){
     }, [loggedIn]);
     
     
+
+    function getBooksFromFirebase(profile_name){
+        document.getElementById('loading-page').style.transform = "translate(0%,0%)";
+        db.collection('users').doc(profile_name).collection('booksList').get()
+                        .then((documents) => {
+                            let bookLists = {}
+                            documents.forEach((doc) =>{
+                                bookLists[doc.id] = doc.data();
+                            });
+                            localStorage.setItem('bookData',JSON.stringify(bookLists));
+                        }).then(() => {
+                            updateBooksData(JSON.parse(localStorage.getItem('bookData')));
+                            document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
+
+                        })
+    }
 
 
     function moveTo(path){
@@ -118,18 +150,20 @@ function addUserFirestore(data){
 
     var users = db.collection("users");
 
+    
     users.doc(data.name).get().then((d) => {
         if(typeof d.data() === 'undefined') {
             console.log("user does not exist add the user dumas")
+            users.doc(data.name).collection('booksList').doc('wantToRead').set({booksData: []});
+            users.doc(data.name).collection('booksList').doc('ownedBooks').set({booksData: []});
+            users.doc(data.name).collection('booksList').doc('readBooks').set({booksData: []});
+            users.doc(data.name).collection('booksList').doc('rentedBooks').set({booksData: []});
+
             users.doc(data.name).set({
                 userName: data.name,
                 userEmail: data.email,
                 profileImage: data.picture,
                 coverImage: "https://www.crushpixel.com/big-static15/preview4/abstract-yellow-triangle-dicorate-pattern-1831790.jpg",
-                bookLists: [],
-                likedBooks: [],
-                wantToRead: [],
-                ownedBooks: []
             });
         }
     });
