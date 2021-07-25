@@ -14,9 +14,9 @@ import SelectedBookPage from './SelectedBook';
 
 export default function TopCategories(){
 
-    let {path} = useRouteMatch()
+    let {path} = useRouteMatch();
 
-    let [categories, updateCategories] = useState({})
+    let [categories, updateCategories] = useState({});
     let [pageLoaded, updatePageLoadStatus] = useState(false);
 
 
@@ -26,7 +26,7 @@ export default function TopCategories(){
         var local_books_data = sessionStorage.getItem('books-categories');
 
         if(local_books_data === null){
-            fetch("/api/popularCategories")
+            fetch("/popularCategories")
             .then(data => {
                 return data.json();
             })
@@ -119,7 +119,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/api/popularCategories/${pageRoute}`)
+            fetch(`/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);

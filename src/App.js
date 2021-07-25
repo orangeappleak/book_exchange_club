@@ -5,6 +5,7 @@ import React,{ Suspense, lazy} from 'react';
 import store from './store';
 import {Provider} from 'react-redux';
 
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +15,7 @@ import './firebase';
 
 
 import UserAccount from  './Components/UserAccount';
+import SelectedBookPage from './Components/SelectedBook';
 
 const MainPage = lazy(() => import('./Components/MainPage'));
 const TopCategories = lazy(() => import('./Components/TopBooks'));
@@ -39,6 +41,9 @@ function App() {
             </Route>
             <Route exact path="/profile">
               <UserAccount />
+            </Route>
+            <Route exact path="/showBook/:book_url">
+                <SelectedBookPage />
             </Route>
           </Switch>
         </Suspense>

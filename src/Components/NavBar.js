@@ -12,10 +12,14 @@ import firebase from 'firebase';
 
 import store from '../store';
 
+import { getFirebaseBookData } from './UserAccount';
+
 export default function NavBar(){
 
     
     let history = useHistory();
+
+    var [initState,updateInitState] = useState(true);
     
     var [userDetails, updateUserDetails] = useState({});
     var [loggedIn, updateLogInStatus] = useState(false);
@@ -23,28 +27,17 @@ export default function NavBar(){
     
     useEffect(() => {
         try{
+
             var profile_data = localStorage.getItem('profile-data');
-            if(profile_data === null){
-                updateLogInStatus(false)
-            }
-            else{
+            if(profile_data != null){
+                var profile_name = JSON.parse(profile_data).name;
                 updateUserDetails(JSON.parse(profile_data));
                 addUserFirestore(JSON.parse(profile_data));
                 updateLogInStatus(true);
-
-                getBooksFromFirebase(JSON.parse(profile_data).name);
-
-                db.collection('users').doc(JSON.parse(profile_data).name).collection('booksList').onSnapshot(function(snapshot){
-                    let changes = snapshot.docChanges();
-                    changes.forEach((change)=>{
-                        if(change.type === 'modified'){
-                            console.log("change-type",change.type);
-                            getBooksFromFirebase(JSON.parse(profile_data).name);
-                        }
-                    })
-                    
-                });
+                getFirebaseBookData(profile_name);
+                
             }
+            
 
            
 
@@ -67,29 +60,13 @@ export default function NavBar(){
                 }
                 ],
             });
+            }
+        catch(Error){
         }
-        catch(Error){}
+        
 
-    }, [loggedIn]);
+    }, [loggedIn,initState]);
     
-    
-
-    function getBooksFromFirebase(profile_name){
-        document.getElementById('loading-page').style.transform = "translate(0%,0%)";
-        db.collection('users').doc(profile_name).collection('booksList').get()
-                        .then((documents) => {
-                            let bookLists = {}
-                            documents.forEach((doc) =>{
-                                bookLists[doc.id] = doc.data();
-                            });
-                            localStorage.setItem('bookData',JSON.stringify(bookLists));
-                        }).then(() => {
-                            updateBooksData(JSON.parse(localStorage.getItem('bookData')));
-                            document.getElementById('loading-page').style.transform = "translate(0%,-100%)";
-
-                        })
-    }
-
 
     function moveTo(path){
         history.replace(path);
@@ -104,7 +81,6 @@ export default function NavBar(){
                     <h1 onClick ={() => moveTo('/topCategories')}>Top Books</h1>
                     <h1>Explore</h1>
                     {loggedIn ? <ProfileData updateLogOutStatus = {updateLogInStatus} userDetails = {userDetails}/> : <div id="sign-in">
-                        {/* <h1 onClick={() => moveTo('/profile')}>Sign In</h1> */}
                         <div id="firebase-login"></div>
                     </div>}
                   
@@ -112,6 +88,11 @@ export default function NavBar(){
             </div>
         </div>
     )
+
+
+
+
+
     function ProfileData({userDetails,updateLogOutStatus}){
         return(
             <div onMouseEnter = {profileDropDown} onMouseLeave = {profileDropDownExit} id="profile">
@@ -154,10 +135,15 @@ function addUserFirestore(data){
     users.doc(data.name).get().then((d) => {
         if(typeof d.data() === 'undefined') {
             console.log("user does not exist add the user dumas")
-            users.doc(data.name).collection('booksList').doc('wantToRead').set({booksData: []});
-            users.doc(data.name).collection('booksList').doc('ownedBooks').set({booksData: []});
-            users.doc(data.name).collection('booksList').doc('readBooks').set({booksData: []});
-            users.doc(data.name).collection('booksList').doc('rentedBooks').set({booksData: []});
+            users.doc(data.name).collection('booksList').doc('wantedToRead').set({data: 'data'});
+            users.doc(data.name).collection('booksList').doc('ownedBooks').set({data: 'data'});
+            users.doc(data.name).collection('booksList').doc('readBooks').set({data: 'data'});
+            users.doc(data.name).collection('booksList').doc('rentedBooks').set({data: 'data'});
+
+            users.doc(data.name).collection('booksList').doc('wantedToRead').collection('book_data').doc("init_book").set({initData: 'init'});
+            users.doc(data.name).collection('booksList').doc('ownedBooks')
+            users.doc(data.name).collection('booksList').doc('readBooks')
+            users.doc(data.name).collection('booksList').doc('rentedBooks')
 
             users.doc(data.name).set({
                 userName: data.name,
