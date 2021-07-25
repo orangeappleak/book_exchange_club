@@ -18,7 +18,7 @@ export default function SelectedBookPage(){
 
     useEffect(() => {
         if(!pageLoaded)
-            fetch("/" + book_url)
+            fetch("/api/" + book_url)
             .then(data => data.json())
             .then(response => {
                     updateBooksData(response);

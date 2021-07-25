@@ -34,7 +34,7 @@ function MostReadBooks(){
     const [mostReadBooksData,updateGotMostReadBooksData] = useState({});
     
     useEffect(() => {
-        fetch('/mostRead').then(data => {return data.json()})
+        fetch('/api/mostRead').then(data => {return data.json()})
         .then((response) => {
             console.log("THIS IS THE RESPONSE",response);
             updateGotMostReadBooksData(response);
@@ -62,7 +62,7 @@ function ArticleList(){
     const [gotArticles,updateGotArticles] = useState(false);
 
     useEffect(() => {
-        fetch('/articles').then((data) => {return data.json()})
+        fetch('/api/articles').then((data) => {return data.json()})
         .then((response) => {
             updateArticleData(response);
         }).then(() => updateGotArticles(true));
