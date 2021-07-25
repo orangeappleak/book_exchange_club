@@ -1,6 +1,6 @@
 [[redirects]]
     from = "/api/*"
-    to = "http://127.0.0.1:5000/:splat"
+    to = "https://bec-remake0510.herokuapp.com/:splat"
     status = 200
 
 [[redirects]]
