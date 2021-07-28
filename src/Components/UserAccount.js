@@ -205,9 +205,6 @@ function BooksList({bookLists}){
         })}
         </div> : <h1>Getting your lists</h1>
     )
-    
-   
-
 }
 
 function BookListCard({bookListId}){

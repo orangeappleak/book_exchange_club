@@ -21,12 +21,11 @@ export default function TopCategories(){
 
 
     useEffect(() => {
-
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var local_books_data = sessionStorage.getItem('books-categories');
 
         if(local_books_data === null){
-            fetch("/api/popularCategories")
+            fetch("/popularCategories")
             .then(data => {
                 return data.json();
             })
@@ -119,7 +118,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/api/popularCategories/${pageRoute}`)
+            fetch(`/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);

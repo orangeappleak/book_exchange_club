@@ -1,14 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import './stylesheets/SelectedBook.css';
-
-
-
 import {customAlert} from '../App';
-
 import {db} from '../firebase';
-import firebase from 'firebase';
 
 export default function SelectedBookPage(){
     let {book_url} = useParams();
@@ -18,7 +12,7 @@ export default function SelectedBookPage(){
 
     useEffect(() => {
         if(!pageLoaded)
-            fetch("/api/" + book_url)
+            fetch("/" + book_url)
             .then(data => data.json())
             .then(response => {
                     updateBooksData(response);

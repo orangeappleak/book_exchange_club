@@ -16,7 +16,8 @@ export default function MainPage(){
                 <h1>Welcome to the Book Exchange Club</h1>
             </ParallaxLayer>
             <ParallaxLayer speed={1.2} offset={0.7}>
-                <div id="most-read-books-wrapper">
+                <div id="most-read-books-section">
+                    <h1>Most Read Books</h1>
                     <MostReadBooks />
                 </div>
                 <div id="articles">
@@ -32,25 +33,57 @@ function MostReadBooks(){
 
     const [gotMostReadBooks,updateGotMostReadBooks] = useState(false);
     const [mostReadBooksData,updateGotMostReadBooksData] = useState({});
+    const [booksToShow,updateBooksToShow] = useState(5);
     
     useEffect(() => {
-        fetch('/api/mostRead').then(data => {return data.json()})
-        .then((response) => {
-            console.log("THIS IS THE RESPONSE",response);
-            updateGotMostReadBooksData(response);
-        }).then(() => updateGotMostReadBooks(true))
-    },[gotMostReadBooks])
 
-    return (gotMostReadBooks) ? <MostReadBooksCard data = {mostReadBooksData.mosReadBooks}/> : <h1>getting most read books</h1>
+        if(localStorage.getItem('mostReadBooks') === null){
+            fetch('/mostRead').then(data => {return data.json()})
+            .then((response) => {
+                console.log("THIS IS THE RESPONSE",response);
+                updateGotMostReadBooksData(response);
+                localStorage.setItem("mostReadBooks",JSON.stringify(response));
+            }).then(() => updateGotMostReadBooks(true))
+        }
+        else{
+            updateGotMostReadBooksData(JSON.parse(localStorage.getItem('mostReadBooks')));
+            updateGotMostReadBooks(true);
+        }
+    },[gotMostReadBooks,booksToShow])
+
+    return (gotMostReadBooks) ? 
+    <div id="most-read-books-dummy">
+        <div id="most-read-books-wrapper">
+            <MostReadBooksCard data = {mostReadBooksData.mosReadBooks} booksToShow = {booksToShow}/> 
+        </div>
+        <div id="show-more-less">
+            <h1 onClick = {(el) => {
+                if(booksToShow <= 50){
+                    updateBooksToShow(booksToShow + 10);
+                }
+            }}>Show More</h1>
+            <h1 onClick = {(el) => {
+                updateBooksToShow(10);
+            }}
+            >Show Less</h1>
+
+        </div>
+
+        
+
+    </div>
+    : <h1>getting most read books</h1>
 }
 
-function MostReadBooksCard({data}){
-    let data_part_one = data.slice(0,32)
+function MostReadBooksCard({data,booksToShow}){
+    let data_part_one = data.slice(0,booksToShow);
     return data_part_one.map((book) => {
+        var sliced_image_part = book.book_image.split('/')[8].split('.')[0];
+        var actual_image_url = book.book_image.split('/').slice(0,8).join('/') +'/'+sliced_image_part+".jpg";
         return <div id="most-read-book-card">
             <h1>{book.book_name}</h1>
             <Link to={`showBook/${book.book_url.split('/')[3]}`}>
-                <img src={book.book_image} />
+                <img src={actual_image_url} />
             </Link>
         </div>
     })
@@ -62,7 +95,7 @@ function ArticleList(){
     const [gotArticles,updateGotArticles] = useState(false);
 
     useEffect(() => {
-        fetch('/api/articles').then((data) => {return data.json()})
+        fetch('/articles').then((data) => {return data.json()})
         .then((response) => {
             updateArticleData(response);
         }).then(() => updateGotArticles(true));

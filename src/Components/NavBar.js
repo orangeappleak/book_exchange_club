@@ -37,9 +37,6 @@ export default function NavBar(){
                 getFirebaseBookData(profile_name);
                 
             }
-            
-
-           
 
             ui.start('#firebase-login', {
                 callbacks: {
@@ -63,8 +60,6 @@ export default function NavBar(){
             }
         catch(Error){
         }
-        
-
     }, [loggedIn,initState]);
     
 
