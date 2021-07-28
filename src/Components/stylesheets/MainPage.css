@@ -13,8 +13,9 @@
 
 #main-page-heading{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    margin-top: 15em;
     margin-bottom: 100px;
 }
 
@@ -25,6 +26,15 @@
     letter-spacing: 5px;
     word-spacing: 5px;
     animation: heading-fade-in 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#main-page-heading p{
+    color: white;
+    font-size: 30px;
+    margin: 20px;
+    width: 50%;
+    text-align: center;
+    font-family: BTM;
 }
 
 #most-read-books-section{

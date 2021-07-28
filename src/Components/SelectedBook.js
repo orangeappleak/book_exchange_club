@@ -12,7 +12,7 @@ export default function SelectedBookPage(){
 
     useEffect(() => {
         if(!pageLoaded)
-            fetch("/" + book_url)
+            fetch("/api/" + book_url)
             .then(data => data.json())
             .then(response => {
                     updateBooksData(response);
@@ -29,6 +29,7 @@ export default function SelectedBookPage(){
             }}>
                 <img alt="cant show" style={{
                     borderRadius: '20px',
+                    width: '50%',
                 }} src="https://www.keyboor.com/images/loading1.gif" />
             </span>
         )
@@ -43,6 +44,9 @@ export default function SelectedBookPage(){
 
 
         return (
+            <div id="top-books-wrapper">
+                
+ 
             <div id="book-info-wrapper">
 
 
@@ -117,6 +121,7 @@ export default function SelectedBookPage(){
                         </div>
                 })}
             </div>
+        </div>
         </div>)
     }
     

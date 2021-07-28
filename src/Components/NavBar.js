@@ -38,7 +38,31 @@ export default function NavBar(){
                 
             }
 
-            ui.start('#firebase-login', {
+            let client_width = document.body.clientWidth;
+
+            if(client_width>400 && client_width<600){
+                ui.start('#firebase-login-mobile', {
+                    callbacks: {
+                        signInSuccessWithAuthResult: function(authResult, redirectUrl){
+                            localStorage.setItem("profile-data",JSON.stringify(authResult.additionalUserInfo.profile));
+                            updateLogInStatus(true);
+                            store.dispatch({type: 'LOGGED_IN'})
+                            return false;
+                        },
+                    },
+                    signInFlow: 'popup',
+                    signInOptions: [{
+                        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                        customParameters: {
+                            prompt: 'select_account'
+                        }
+    
+                    }
+                    ],
+                })
+            }
+            else {
+                ui.start('#firebase-login', {
                 callbacks: {
                     signInSuccessWithAuthResult: function(authResult, redirectUrl){
                         localStorage.setItem("profile-data",JSON.stringify(authResult.additionalUserInfo.profile));
@@ -56,7 +80,8 @@ export default function NavBar(){
 
                 }
                 ],
-            });
+            })}
+
             }
         catch(Error){
         }
@@ -64,6 +89,9 @@ export default function NavBar(){
     
 
     function moveTo(path){
+        try{
+            document.getElementById('mobile-nav-bar').classList.remove('show');
+        }catch(Error){}
         history.replace(path);
     }
 
@@ -81,6 +109,41 @@ export default function NavBar(){
                   
                 </div>
             </div>
+
+            <div id="mobile-nav-bar-wrapper">
+                <div id="menu-info">
+                    <img height="30px" onClick ={() => {
+                        document.getElementById('mobile-nav-bar').classList.add("show");
+                    }} src="https://img.icons8.com/fluent/96/000000/menu--v2.png"/>
+                    <h1 style={{
+                        color: 'white',
+                        fontFamily: 'BTM',
+                        fontSize: '20px',
+                        letterSpacing: '1.5px',
+                    }}>Bec</h1>
+                </div>
+                <div id="mobile-nav-bar">
+                    <h1 style={{
+                        fontSize: '40px',
+                        fontFamily: 'BTM',
+                        letterSpacing: '5px',
+                    }}>Menu</h1>
+                    <div id="nav-links">
+                        <h1 onClick = {() => moveTo('/')}>Home</h1>
+                        <h1 onClick ={() => moveTo('/topCategories')}>Top Books</h1>
+                        <h1>Explore</h1>
+                        {loggedIn ? <ProfileData mobile={true} updateLogOutStatus = {updateLogInStatus} userDetails = {userDetails}/> : <div id="sign-in">
+                            <div id="firebase-login-mobile"></div>
+                        </div>}
+                    </div>
+                    <div id="close-menu">
+                    <h1 onClick ={() => {
+                        document.getElementById('mobile-nav-bar').classList.remove("show");
+                        }}>close</h1>
+                    </div>
+            </div>
+        
+            </div>
         </div>
     )
 
@@ -88,7 +151,24 @@ export default function NavBar(){
 
 
 
-    function ProfileData({userDetails,updateLogOutStatus}){
+    function ProfileData({userDetails,updateLogOutStatus,mobile}){
+
+        if(mobile){
+            return(
+                <div onMouseEnter = {profileDropDown} onMouseLeave = {profileDropDownExit} id="profile">
+                    <img onClick ={() => moveTo('/profile')} src={userDetails.picture} alt="cant show"/>
+                    <h1 style={{
+                        border: '2px solid white',
+                        padding: ' 10px 20px',
+                        fontSize: '18px',
+                        color: 'black',
+                        backgroundColor: 'white',
+                        borderRadius: '10px',
+                        margin: '25px',
+                    }} id='log-out' onClick = {() => ProfileLogOut({updateLogOutStatus})}>Log Out</h1>
+                </div>
+            )
+        }
         return(
             <div onMouseEnter = {profileDropDown} onMouseLeave = {profileDropDownExit} id="profile">
                 <img src={userDetails.picture} alt="cant show"/>

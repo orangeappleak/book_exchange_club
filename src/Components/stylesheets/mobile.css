@@ -14,31 +14,169 @@
     #root #nav-bar-wrapper{
         position: relative;
     }
-    
+
     #root #nav-bar{
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 0;
-        margin: 0;
+        display: none;
+    }
+
+    #root #mobile-nav-bar-wrapper{
+        height: auto;
+        width: 100%;
+        display: block !important;
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
         top: 0;
+        left: 0;
+    }
+
+    #root #mobile-nav-bar-wrapper #menu-info{
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #root #nav-bar-wrapper #mobile-nav-bar{
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        transform: translate(0%,-100%);
+        position: absolute;
+        background-color:black;
+        z-index: 6;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    #root #nav-bar-wrapper #mobile-nav-bar.show{
+        transform: translate(0%,0%);
+    }
+
+    #mobile-nav-bar #nav-links{
+        margin: 40px;
+        flex-direction: column;
+    }
+
+    #mobile-nav-bar #nav-links h1{
+        margin: 10px 0;
+        font-family: 'Lato';
+        color: orange;
+    }
+
+    #mobile-nav-bar #nav-links #profile{
+        margin: 40px;
+    }
+
+    #mobile-nav-bar #nav-links #profile #profile-name{
+        font-size: 15px;
+        color:white;
+    }
+
+    #mobile-nav-bar #nav-links #profile img{
+        border: 2px solid white;
+        width: 60%;
+    }
+
+
+    body #main-page-heading{
+        margin-top: 50px;
+        height: 50vh !important;
+        flex-direction: column;
+    }
+
+    #main-page-heading h1{
+        margin: 20px;
+        width: auto !important;
+        font-size: 50px !important;
+        text-align: left;
+        top: 0;
+    }
+
+    #root #main-page-heading p{
+        color: white;
+        width: auto;
+        margin: 20px;
+        font-family: 'BTM';
+        font-size: 22px;
+        margin: 20px;
+        text-align: justify;
+    }
+
+    #main-page-image-wrapper img{
+        height: 100%;
+        transform: translate(-10%,0%);
+        width: auto !important;
+        filter: contrast(1.6) brightness(0.5) !important;
+    }
+
+    body #most-read-books-section{
+        padding: 20px;
+        margin: 10px;
+    }
+
+    #most-read-books-section #most-read-books-wrapper{
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 10px;
+    }
+
+    #most-read-books-wrapper #most-read-book-card a{
         width: 100%;
         height: auto;
-        border-radius: 0;
     }
 
-    #nav-bar #nav-links{
-        display: block;
-        justify-content: center;
-        align-items: center;
+    #most-read-books-wrapper #most-read-book-card h1{
+        display: none;
     }
 
-    #nav-bar #nav-links h1{
-        margin: 15px 0;
+    #most-read-books-dummy #show-more-less{
+        width: 100% !important;
         text-align: center;
-        font-size: 18px;
+        justify-content: space-evenly !important;
+    }
+
+    #root #articles{
+        padding: 0;
+    }
+    
+    #root #articles #article-body #article-image-wrapper img{
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    #articles #article-body{
+        margin: 15px 0;
+    }
+
+    #articles #article-body #article-info{
+        flex: 1;
+        margin: 0;
+        padding: 15px;
+        text-align: left;
+    }
+
+    #articles #article-body #article-info1 h1{
+        font-size: 28px;
+    }
+
+    #articles #article-body #article-info1 p{
+        font-size: 17px;
+        text-align: justify;
+    }
+
+
+    #root #articles #article-body{
+        flex-direction: column;
+    }
+
+
+    #root #show-more-less h1{
+        font-size: 20px;
     }
 
     #root #top-books-main{
@@ -183,16 +321,52 @@
         text-align: center;
     }
 
+    .book-info #image-wrapper{
+        padding: 100px 40px;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-info #image-wrapper img{
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .book-info #image-wrapper .wantedToRead,.ownedBooks,.readBooks{
+        width: 70%;
+        font-size: 12px;
+        margin: 10px 0 !important;
+    }
+
+    .book-info #image-wrapper .wantedToRead{
+        margin: 0;
+    }
+
+    .book-info #image-wrapper .ownedBooks{
+        margin: 0;
+    }
+
+    .book-info #image-wrapper .readBooks{
+        margin: 0;
+    }
+
+    #root #top-books-wrapper{
+        width: 100vw;
+    }
+
     #top-books-wrapper #book-info-wrapper .book-info{
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0
+        padding: 0;
     }
 
     #book-info-wrapper .book-info #seperated-book-info{
         margin: 0;
-        padding: 30px;
+        padding: 20px;
+        width: auto;
     }
 
     #book-info-wrapper #book-info-and-genres{
@@ -242,7 +416,27 @@
         margin: 0 20px 0 0;
     }
 
-    
+    #root #profile-page #shit{
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin: 0;
+    }
+
+    #root #profile-page #shit .bookslist{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        width: 80%;
+    }
+
+    #root #profile-page #shit .bookslist #profile-books #book-card #book-image #book-options h1:first-child{
+        margin: 0;
+        width: 10%;
+    }
+
+    #root #profile-page #shit .bookslist #profile-books #book-card img{
+        width: 50%;
+    }
 
 
 }

@@ -14,6 +14,7 @@ export default function MainPage(){
             </ParallaxLayer>
             <ParallaxLayer id="main-page-heading" speed={1.5} offset={0}>
                 <h1>Welcome to the Book Exchange Club</h1>
+                <p>Find new books that you want to read by swapping the older books that you have already finished reading.</p>
             </ParallaxLayer>
             <ParallaxLayer speed={1.2} offset={0.7}>
                 <div id="most-read-books-section">
@@ -38,7 +39,7 @@ function MostReadBooks(){
     useEffect(() => {
 
         if(localStorage.getItem('mostReadBooks') === null){
-            fetch('/mostRead').then(data => {return data.json()})
+            fetch('/api/mostRead').then(data => {return data.json()})
             .then((response) => {
                 console.log("THIS IS THE RESPONSE",response);
                 updateGotMostReadBooksData(response);
@@ -95,7 +96,7 @@ function ArticleList(){
     const [gotArticles,updateGotArticles] = useState(false);
 
     useEffect(() => {
-        fetch('/articles').then((data) => {return data.json()})
+        fetch('/api/articles').then((data) => {return data.json()})
         .then((response) => {
             updateArticleData(response);
         }).then(() => updateGotArticles(true));

@@ -25,7 +25,7 @@ export default function TopCategories(){
         var local_books_data = sessionStorage.getItem('books-categories');
 
         if(local_books_data === null){
-            fetch("/popularCategories")
+            fetch("/api/popularCategories")
             .then(data => {
                 return data.json();
             })
@@ -118,7 +118,7 @@ function TopBooksPage(){
         document.getElementById('loading-page').style.transform = "translate(0%,0%)";
         var localBooksData = sessionStorage.getItem(pageRoute);
         if(localBooksData === null){
-            fetch(`/popularCategories/${pageRoute}`)
+            fetch(`/api/popularCategories/${pageRoute}`)
             .then(data => {return data.json()})
             .then(response => {
                 updateBooksData(response);
