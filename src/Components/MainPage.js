@@ -39,7 +39,7 @@ function MostReadBooks(){
     useEffect(() => {
 
         if(localStorage.getItem('mostReadBooks') === null){
-            fetch('/api/mostRead').then(data => {return data.json()})
+            fetch('/https://bec-goodreads-api.herokuapp.com/mostRead').then(data => {return data.json()})
             .then((response) => {
                 console.log("THIS IS THE RESPONSE",response);
                 updateGotMostReadBooksData(response);
@@ -96,7 +96,7 @@ function ArticleList(){
     const [gotArticles,updateGotArticles] = useState(false);
 
     useEffect(() => {
-        fetch('/api/articles').then((data) => {return data.json()})
+        fetch('/https://bec-goodreads-api.herokuapp.com/articles').then((data) => {return data.json()})
         .then((response) => {
             updateArticleData(response);
         }).then(() => updateGotArticles(true));
